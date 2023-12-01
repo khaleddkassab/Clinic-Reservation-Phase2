@@ -1,0 +1,47 @@
+/* login.component.scss */
+
+.row {
+  margin-top: 50px; /* Add some top margin to the row */
+}
+
+.col-md-5 {
+  margin: 0 auto; /* Center the column */
+}
+
+.card {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow to the card */
+}
+
+.card-body {
+  padding: 20px; /* Add padding to the card body */
+}
+
+.form-horizontal {
+  display: flex;
+  flex-direction: column; /* Align form items vertically */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Add some bottom margin to form groups */
+}
+
+label {
+  font-weight: bold; /* Make labels bold */
+}
+
+.form {
+  width: 100%; /* Set input width to 100% */
+  padding: 8px; /* Add padding to the inputs */
+  margin-bottom: 10px; /* Add some bottom margin to the inputs */
+}
+
+.btn-group {
+  display: flex; /* Use flexbox to make the buttons appear in a row */
+}
+
+.btn-primary,
+.btn-danger {
+  margin-right: 10px; /* Add margin between the buttons */
+}
+
+/* Add more styles as needed */

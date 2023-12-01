@@ -1,0 +1,71 @@
+<div class="row ">
+
+  <div class="col-md-5" style="margin-left: 10%">
+    <h4>GetAllSlots</h4>
+    <hr/>
+    <div class="card card-body by-light">
+      <form class="form-horizontal">
+
+
+        <div class="form-group">
+
+          <button type="submit" class="btn btn-primary" (click)="getAllSlots()">GetAllSlots</button>
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="row"style="margin-left: 10%">
+  <div class="col-md-5">
+    <h4>Search Slots</h4>
+    <hr />
+    <div class="card card-body bg-light">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label>DoctorId</label>
+          <input type="text" [(ngModel)]="doctorId" [ngModelOptions]="{ standalone: true }" class="form-control" placeholder="Doctor ID">
+        </div>
+
+        <br />
+        <div class="form-group">
+          <button type="button" class="btn btn-danger" (click)="clearData()">Clear</button> &nbsp;
+          <button type="button" class="btn btn-primary" (click)="getSlots()">Get</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+
+  <div class="col-md-7"style="margin-left: 10%">
+    <h4>List Slots</h4>
+    <hr />
+    <div class="card card-body bg-light">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">slotId</th>
+          <th scope="col">doctorId</th>
+          <th scope="col">startTime</th>
+          <th scope="col">endTime</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let slot of slots">
+          <td>{{ slot._id }}</td>
+          <td>{{ slot.doctor }}</td>
+          <td>{{ slot.startTime }}</td>
+          <td>{{ slot.endTime }}</td>
+          <td><button type="button" class="btn btn-primary" (click)="reserveSlot(slot._id,slot.doctor)">Reserve</button> </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>

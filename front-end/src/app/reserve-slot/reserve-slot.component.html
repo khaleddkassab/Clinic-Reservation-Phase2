@@ -1,0 +1,32 @@
+<div class="row ">
+
+  <div class="col-md-5">
+    <h4>Patients Reservations</h4>
+    <hr/>
+    <div class="card card-body by-light">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label >SlotId</label>
+          <input type="text" [(ngModel)]="slotId"[ngModelOptions]="{standalone:true}" class="form" placeholder="SlotId">
+        </div>
+
+
+        <br/>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" (click)="reserveSlot()">Reserve</button>
+
+          <button type="submit" class="btn btn-danger" (click)="clearData()">Clear</button> &nbsp;
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+
+
+
+
+</div>

@@ -1,0 +1,38 @@
+<!-- home.component.html -->
+
+<div class="container">
+  <h2>Welcome to Our Clinic</h2>
+  <p *ngIf="isDoctor()">Hello Doctor.</p>
+  <p *ngIf="isPatient()">Hello Patient.</p>
+
+  <p>Explore our services and manage your appointments.</p>
+  <div class="buttons">
+
+    <div class="col-md-3">
+      <ul class="list-group">
+        <ng-container *ngIf="isDoctor(); else patientItems">
+          <!-- Doctor items -->
+          <a routerLink="/slot" class="list-group-item">See All Slots By Doctor ID (Pat. or Doc.)</a>
+          <a routerLink="/createSlot" class="list-group-item">Create Slots By Doctor (Doc.)</a>
+          <a routerLink="/doctorSchedule" class="list-group-item">Doctor Schedule (Doc.)</a>
+          <a routerLink="/notifications" class="list-group-item">Notifications</a>
+
+
+        </ng-container>
+
+        <ng-template #patientItems>
+          <!-- Patient items -->
+          <a routerLink="/slot" class="list-group-item">See All Slots By Doctor ID (Pat. or Doc.)</a>
+          <a routerLink="/reserveSlot" class="list-group-item">Reserve Slot (Pat.)</a>
+          <a routerLink="/viewMyReservations" class="list-group-item">My Appointments (Pat.)</a>
+          <a routerLink="/updateReservation" class="list-group-item">Update Reservation (Pat.)</a>
+          <a routerLink="/deleteReservation" class="list-group-item">Delete Reservation (Pat.)</a>
+        </ng-template>
+
+        <a routerLink="/logout" class="list-group-item">Logout (Pat. or Doc.)</a>
+      </ul>
+    </div>
+
+  </div>
+</div>
+

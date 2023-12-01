@@ -1,0 +1,15 @@
+<!-- app.component.html -->
+
+<div *ngIf="isLoggedIn; else loginSection">
+  <!-- Content to show when logged in -->
+  <app-nav-bar></app-nav-bar>
+
+  <router-outlet></router-outlet>
+</div>
+
+<ng-template #loginSection>
+  <!-- Content to show when not logged in -->
+  <app-nav-bar></app-nav-bar>
+
+  <router-outlet></router-outlet>
+</ng-template>

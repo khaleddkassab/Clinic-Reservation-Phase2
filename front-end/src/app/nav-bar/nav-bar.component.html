@@ -1,0 +1,28 @@
+<!-- navbar.component.html -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" [routerLink]="getHomeLink()">Clinic Reservations</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngIf="isLoggedIn()" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="getHomeLink()">Home</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn()">
+      <li class="nav-item">
+        <button type="submit" class="btn btn-primary" (click)="logout()">Logout</button>
+      </li>
+      <!-- Add more navigation items as needed -->
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn() && !isHomePage()">
+      <!-- Check if it's not the home page to display the button -->
+      <li class="nav-item">
+        <button type="submit" class="btn btn-primary" [routerLink]="getRegisterLink()">{{ getButtonText() }}</button>
+      </li>
+      <!-- Add more navigation items as needed -->
+    </ul>
+  </div>
+</nav>

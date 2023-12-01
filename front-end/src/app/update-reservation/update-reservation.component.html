@@ -1,0 +1,33 @@
+<div class="row ">
+
+  <div class="col-md-5">
+    <h4>Update Patient Reservation</h4>
+    <hr/>
+    <div class="card card-body by-light">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label >CurrentSlotId</label>
+          <input type="text" [(ngModel)]="currentSlotId"[ngModelOptions]="{standalone:true}" class="form" placeholder="CurrentSlotId">
+        </div>
+        <div class="form-group">
+          <label >NewSlotId</label>
+          <input type="text" [(ngModel)]="newSlotId"[ngModelOptions]="{standalone:true}" class="form" placeholder="NewSlotId">
+        </div>
+
+        <br/>
+        <div class="form-group">
+          <button type="submit" class="btn btn-danger" (click)="clearData()">Clear</button> &nbsp;
+          <button type="submit" class="btn btn-primary" (click)="updateReservation()">Update</button>
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+
+
+
+
+</div>

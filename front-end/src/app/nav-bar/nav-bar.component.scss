@@ -1,0 +1,30 @@
+/* navbar.component.scss */
+
+.navbar {
+  background-color: rgb(32,0,161); /* Set your desired background color */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.navbar-brand {
+  font-size: 1.5rem; /* Adjust the font size */
+  font-weight: bold; /* Set the font weight */
+}
+
+.navbar-nav {
+  margin-right: 20px; /* Add some margin on the right side of the nav items */
+}
+
+.nav-link {
+  font-size: 1rem; /* Adjust the font size */
+}
+
+.nav-link.active {
+  color: #007bff; /* Set the active link color */
+}
+
+.btn-primary {
+  margin-left: 10px; /* Add margin to the left of the Logout button */
+}
+
+/* Add more styles as needed */
+
