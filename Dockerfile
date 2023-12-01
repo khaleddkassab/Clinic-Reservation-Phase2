@@ -1,14 +1,27 @@
-# Use the official MongoDB image as the base image
-FROM mongo
 
-# Set the working directory
-WORKDIR /usr/src/app
+FROM node:18-alpine
 
-# Create a directory to store MongoDB data
-RUN mkdir -p /data/db
+# Set environment variables
+ENV PORT=8080
+ENV API_SECRET=This_is_very_secret_string
+ENV MONGO_HOST=mongodb
+ENV MONGO_PORT=27017
+ENV MONGO_DB=usersdb
 
-# Expose the MongoDB default port
-EXPOSE 27017
+# Set the working directory in the container
+WORKDIR /app
 
-# Start MongoDB
-CMD ["mongod"]
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install app dependencies
+RUN npm install
+
+# Copy the rest of the application code to the working directory
+COPY . .
+
+# Expose the app's port
+EXPOSE $PORT
+
+# Command to run your application
+CMD ["node", "app.js"]
