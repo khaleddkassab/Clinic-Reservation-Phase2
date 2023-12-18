@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {environment} from "../../enviroments/environment";
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-update-resrvation',
@@ -10,10 +10,10 @@ import {environment} from "../../enviroments/environment";
 export class UpdateReservationComponent {
   currentSlotId: string = '';
   newSlotId: string = '';
-  private apiUrl = environment.backendApiUrl;
+  private apiUrl ;
 
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.apiUrl = this.configService.getApiBaseUrl();
   }
 
   updateReservation() {

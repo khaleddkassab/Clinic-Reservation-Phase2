@@ -1,4 +1,5 @@
+// src/environments/environment.ts
 export const environment = {
   production: true,
-  backendApiUrl: 'https://back-end:8080/', // Specify your production backend container path
+  apiUrl: 'http://localhost:3000',  // Your default API URL
 };

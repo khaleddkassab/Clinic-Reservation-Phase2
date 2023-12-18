@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {environment} from "../../enviroments/environment";
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-patient',
@@ -9,13 +9,15 @@ import {environment} from "../../enviroments/environment";
 })
 export class CreateSlotComponent {
   token: string | null = null;
-  private apiUrl = environment.backendApiUrl;
 
   startTime: string = '2011-11-01T11:00:00';
   endTime: string = '2012-11-01T12:00:00';
 
 
-  constructor(private http: HttpClient) {
+  private apiUrl;
+
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.apiUrl = this.configService.getApiBaseUrl();
   }
 
   createSlot() {

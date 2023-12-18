@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
-import {environment} from "../../enviroments/environment";
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-login',
@@ -13,14 +13,19 @@ export class LoginComponent {
   token = '';
   email: string = '';
   password: string = '';
-  private apiUrl = environment.backendApiUrl;
+  private apiUrl;
+
+
 
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private configService: ConfigService
+  ) {
+    this.apiUrl = this.configService.getApiBaseUrl();
+  }
 
   login() {
     let bodyData = {

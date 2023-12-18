@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {ConfigService} from "../config.service";
 import {environment} from "../../enviroments/environment";
 
 @Component({
@@ -12,10 +13,12 @@ export class RegisterComponent {
   email: string = '';
   role: string = 'patient'; // Set a default value for the role
   password: string = '';
-  private apiUrl = environment.backendApiUrl;
+  private apiUrl
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.apiUrl = this.configService.getApiBaseUrl();
   }
+
 
   register() {
     let bodyData = {

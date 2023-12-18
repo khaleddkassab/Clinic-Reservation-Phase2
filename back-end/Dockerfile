@@ -1,12 +1,5 @@
-
+# Use the specified Node.js version
 FROM node:18-alpine
-
-# Set environment variables
-ENV PORT=8080
-ENV API_SECRET=This_is_very_secret_string
-ENV MONGO_HOST=mongodb
-ENV MONGO_PORT=27017
-ENV MONGO_DB=usersdb
 
 # Set the working directory in the container
 WORKDIR /app
@@ -20,7 +13,20 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Expose the app's port
+# Copy the .env file into the container
+COPY .env .env
+
+# Define build-time variables with default values
+ARG PORT
+ARG MONGODB_URI
+ARG ANGULAR_URI
+ARG ANGULAR_PORT
+# Set environment variables for runtime
+ENV PORT=$PORT
+ENV MONGODB_URI=$MONGODB_URI
+ENV ANGULAR_URI=$ANGULAR_URI
+ENV ANGULAR_PORT=$ANGULAR_PORT
+# Expose the app's port (optional, doesn't actually publish the port)
 EXPOSE $PORT
 
 # Command to run your application

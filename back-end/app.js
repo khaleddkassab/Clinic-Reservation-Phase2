@@ -11,16 +11,26 @@ const verifyToken = require('./middlewares/authJWT'); // Use a relative path to 
 const cors = require('cors');
 require('dotenv').config();
 
+const angularUrl = process.env.ANGULAR_URI+":"+process.env.ANGULAR_PORT ;
 
 app.use(cors({
-    origin: "http://localhost:4200"
+  origin:angularUrl
 }));
 
-// Connect to the database
-mongoose.connect("mongodb://mongodb/usersdb", {
+
+// Use process.env to access environment variables
+require('dotenv').config();
+
+
+const mongoUrl = process.env.MONGODB_URI ;
+
+mongoose.connect(mongoUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+// Rest of your app.js code...
+
 
 mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
@@ -50,7 +60,12 @@ app.use(messagesRoutes);
 
 
 // Set up the server to listen on the specified port
-const port = process.env.PORT || 8080;
+const port = parseInt(process.env.PORT);
+
+console.log('DATABASE URI :', process.env.MONGODB_URI)
+console.log('FRONTEND URI :', process.env.ANGULAR_URI,":",process.env.ANGULAR_PORT)
+
 app.listen(port, () => {
-  console.log(`Server is live on port ${port}`);
+  console.log(`Server is live on port ${port}`, ` live on URI ${mongoUrl}`);
 });
+
