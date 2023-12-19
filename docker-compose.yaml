@@ -1,59 +1,42 @@
 version: '3'
 services:
-#  back-end:
-#    build:
-#      context: ./back-end
-#      args:
-#        - PORT=${BACKEND_API_PORT:-3000}
-#        - MONGODB_URI=${MONGODB_URI:-mongodb://data-base:27017/usersdb}
-#        - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost}
-#        - CORS_PORT=${CORS_PORT:-4200}
-#    container_name: back-end
-#    restart: always
-#    ports:
-#      - ${BACKEND_API_PORT:-3000}:${BACKEND_API_PORT:-3000}
-#    depends_on:
-#      - data-base
-#    environment:
-#      - BACKEND_API_PORT=${BACKEND_API_PORT:-3000}
-#      - MONGODB_URI=${MONGODB_URI:-mongodb://data-base:27017/usersdb}
-#      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost}
-#      - CORS_PORT=${CORS_PORT:-4200}
-#    networks:
-#      - clinic-network
-#
-#  data-base:
-#    image: mongo:latest
-#    container_name: mongodb
-#    ports:
-#      - "27017:27017"
-#    volumes:
-#      - mongo-data:/data/db
-#    networks:
-#      - clinic-network
+
+  mongodb:
+    build:
+      context: ./data-base
+    container_name: mongodb
+    ports:
+      - "${MONGODB_PORT:-27018}:27017"
+
+  back-end:
+    build:
+      context: ./back-end  # Replace with the actual path to your backend code
+      args:
+        - PORT=${BACKEND_API_PORT:-8084}
+        - MONGODB_URI=${MONGODB_URI:-mongodb://mongodb:${MONGODB_PORT:-27017}/usersdb}
+        - ANGULAR_URI=${ANGULAR_URI:-http://localhost}
+        - ANGULAR_PORT=${ANGULAR_PORT:-5000}
+    container_name: back-end
+    restart: always
+    ports:
+      - ${BACKEND_API_PORT:-8084}:${BACKEND_API_PORT:-8084}
+    depends_on:
+      - mongodb
+      - front-end
+    environment:
+      - BACKEND_API_PORT=${BACKEND_API_PORT:-8084}
+      - MONGODB_URI=${MONGODB_URI:-mongodb://mongodb:${MONGODB_PORT:-27017}/usersdb}
+      - ANGULAR_URI=${ANGULAR_URI:-http://localhost}
+      - ANGULAR_PORT=${ANGULAR_PORT:-5000}
 
   front-end:
     build:
-      context: ./front-end
+      context: ./front-end  # Replace with the actual path to your frontend code
     container_name: front-end
     environment:
-      - BACKEND_API_URI=BACKEND_API_URI:-http://localhost:8084
+      - BACKEND_API_URI=${BACKEND_API_URI:-http://localhost:8084}
+      - ANGULAR_PORT=${ANGULAR_PORT:-5000}  # Use the same value as in the back-end service
     ports:
-      - 4200:80
+      - ${ANGULAR_PORT:-5000}:80
     env_file:
       - front-end/.env
-#    networks:
-#      - clinic-network
-#    volumes:
-#      - ./front-end/src:/app/src
-#    stdin_open: true
-#    tty: true
-#    depends_on:
-#      - back-end
-
-#volumes:
-#  mongo-data:
-#
-#networks:
-#  clinic-network:
-#    driver: bridge

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {ConfigService} from "../config.service";
-import {environment} from "../../enviroments/environment";
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-patient',
@@ -13,27 +12,34 @@ export class RegisterComponent {
   email: string = '';
   role: string = 'patient'; // Set a default value for the role
   password: string = '';
-  private apiUrl
+  private apiUrl;
 
   constructor(private http: HttpClient, private configService: ConfigService) {
     this.apiUrl = this.configService.getApiBaseUrl();
   }
 
-
   register() {
     let bodyData = {
-      "fullName": this.fullName,
-      "email": this.email,
-      "role": this.role,
-      "password": this.password
+      fullName: this.fullName,
+      email: this.email,
+      role: this.role,
+      password: this.password
     };
+
     const url = `${this.apiUrl}register`;
 
-    this.http.post(url, bodyData).subscribe((resultData: any) => {
-      console.log(resultData);
-      alert("Patient registered successfully");
-      this.clearData();
-    });
+    this.http.post(url, bodyData).subscribe(
+      (resultData: any) => {
+        console.log(resultData);
+        alert(bodyData.role + ' registered successfully');
+        this.clearData();
+      },
+      (error) => {
+        console.error('Error during registration:', error);
+        alert('Registration failed. Please try again.');
+        // Handle additional error logic if needed
+      }
+    );
   }
 
   clearData() {
